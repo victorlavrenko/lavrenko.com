@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lavrenko Pitch — AI-Native Enterprise Browser</title>
+    <meta
+      name="description"
+      content="Investor pitch for Lavrenko's AI-native enterprise browser blending security, engagement, and explainable AI."
+    />
+    <meta name="theme-color" content="#0b0b0f" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lavrenko Pitch — AI-Native Enterprise Browser" />
+    <meta
+      property="og:description"
+      content="Turning disengaged employees from the weakest link into the strongest asset."
+    />
+    <meta property="og:image" content="https://lavrenko.com/og.png" />
+    <meta property="og:url" content="https://lavrenko.com/pitch" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+            colors: {
+              base: '#0b0b0f',
+              accent: { 500: '#6366f1', 600: '#4f46e5' }
+            },
+            boxShadow: {
+              glow: '0 0 0 1px rgba(99,102,241,0.25), 0 8px 40px rgba(99,102,241,0.18)'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        scroll-behavior: smooth;
+      }
+      .noise::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.4"/></svg>');
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 0.4rem 0.9rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .slide {
+        display: none;
+      }
+      .slide-active {
+        display: block;
+        animation: fade-in 0.45s ease;
+      }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(16px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .progress-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        background-color: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 0.75rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+      .progress-chip[aria-current='true'] {
+        background: linear-gradient(120deg, rgba(99, 102, 241, 0.18), rgba(99, 102, 241, 0.35));
+        border-color: rgba(99, 102, 241, 0.45);
+        color: #fff;
+      }
+      .progress-chip:focus-visible {
+        outline: 2px solid rgba(99, 102, 241, 0.55);
+        outline-offset: 2px;
+      }
+      .nav-button[disabled] {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .slide-active {
+          animation: none;
+        }
+      }
+      @media print {
+        html,
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          background: #05050a !important;
+          color: #f8fafc !important;
+        }
+        header,
+        .slider-controls,
+        .progress-rail,
+        .noise::before {
+          display: none !important;
+        }
+        main {
+          padding: 0 1.5rem 1.5rem !important;
+        }
+        .slide,
+        .slide-active {
+          display: block !important;
+          animation: none !important;
+          break-after: page;
+        }
+        .slide:last-of-type {
+          break-after: auto;
+        }
+        .print-visible {
+          display: block !important;
+        }
+        .print-friendly {
+          background: rgba(17, 25, 40, 0.88) !important;
+          color: #f8fafc !important;
+          border-color: rgba(148, 163, 184, 0.25) !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-base text-zinc-100 antialiased selection:bg-accent-500/30 selection:text-white noise">
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10 gradient-glow">
+      <div
+        class="absolute -top-48 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-accent-600/50 via-accent-500/20 to-transparent blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-0 right-0 h-[32rem] w-[32rem] translate-x-1/3 translate-y-1/3 rounded-full bg-gradient-to-tr from-fuchsia-600/25 via-accent-500/10 to-transparent blur-3xl"
+      ></div>
+    </div>
+
+    <header class="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="grid place-items-center h-10 w-10 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 ring-1 ring-white/10 shadow-glow">
+          <span class="text-lg font-bold tracking-tight">L</span>
+        </span>
+        <span class="text-lg font-semibold tracking-tight">Lavrenko</span>
+      </div>
+      <div class="flex items-center gap-2 text-xs sm:text-sm text-zinc-400">
+        <span class="inline-flex items-center gap-1 rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Confidential Pitch
+        </span>
+        <span class="hidden sm:inline">Updated <span id="updated-date"></span></span>
+      </div>
+    </header>
+
+    <main class="px-6 pb-24">
+      <section class="max-w-6xl mx-auto pt-12 sm:pt-20">
+        <div
+          id="deck"
+          class="relative"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Lavrenko investor pitch deck"
+        >
+          <div class="space-y-12">
+            <article class="slide slide-active" data-slide="1" aria-hidden="false">
+              <div class="max-w-4xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 shadow-xl shadow-indigo-500/10 overflow-hidden print-friendly">
+                <div class="p-8 sm:p-12 flex flex-col gap-8">
+                  <div class="flex flex-wrap gap-3 items-center text-xs uppercase tracking-[0.2em] text-accent-200/80">
+                    <span class="chip">Slide 1 • Cover</span>
+                    <span class="chip">AI • Security • Engagement</span>
+                  </div>
+                  <div class="flex flex-col gap-6">
+                    <div>
+                      <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
+                        AI-Native Enterprise Browser for Security &amp; Engagement
+                      </h1>
+                      <p class="mt-4 text-lg text-zinc-300/90 max-w-2xl">
+                        Turning disengaged employees from the weakest link into the strongest asset.
+                      </p>
+                    </div>
+                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="grid place-items-center h-12 w-12 rounded-2xl bg-white/10 ring-1 ring-white/10">
+                          <span class="text-xl font-semibold">VL</span>
+                        </div>
+                        <div>
+                          <p class="text-sm font-semibold text-white">Victor Lavrenko</p>
+                          <p class="text-sm text-zinc-400">Founder • ex-Cốc Cốc (30M MAU)</p>
+                        </div>
+                      </div>
+                      <div class="flex flex-wrap gap-3 text-xs text-zinc-400">
+                        <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">PeaceTech VC intro</span>
+                        <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">lavrenko.com</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="h-32 bg-gradient-to-r from-accent-600/40 via-accent-500/20 to-transparent"></div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="2" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 2 • Problem</span>
+                  <span class="chip">Engagement Risk</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-5 sm:gap-8">
+                  <div class="sm:col-span-3 space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Disengagement is the hidden breach vector</h2>
+                    <p class="text-base text-zinc-300/90">
+                      80% of insider security incidents trace back to negligence or disengagement. $8.8T lost globally due to disengaged employees (Gallup 2024).
+                    </p>
+                  </div>
+                  <div class="sm:col-span-2 flex flex-col gap-3 text-sm text-zinc-300/80">
+                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                      <p class="font-semibold text-zinc-100">Macro stressors</p>
+                      <ul class="mt-2 space-y-2 list-disc list-inside">
+                        <li>Globalization + $100K H1B fee → more offshore teams.</li>
+                        <li>Remote/hybrid work eroding loyalty.</li>
+                        <li>RTO &amp; surveillance failing to restore engagement.</li>
+                      </ul>
+                    </div>
+                    <p class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 text-sm text-zinc-300/80">
+                      Result: More incidents, lower productivity, cultural drift.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="3" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 3 • Why Now</span>
+                  <span class="chip">Regulation</span>
+                  <span class="chip">Market Signals</span>
+                </div>
+                <div class="grid gap-8 sm:grid-cols-2">
+                  <div class="space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Regulatory pressure creates urgency</h2>
+                    <p class="text-base text-zinc-300/90">
+                      EU AI Act, NIS2, and SEC 4-day cyber rules demand explainable, browser-level controls — budgets are already earmarked.
+                    </p>
+                  </div>
+                  <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Category validation</h3>
+                    <ul class="space-y-3 text-sm text-zinc-300/80">
+                      <li><span class="font-semibold text-white">Island</span> (enterprise browser) → $4.8B valuation (2025).</li>
+                      <li><span class="font-semibold text-white">Talon</span> acquired by Palo Alto Networks (~$450–650M).</li>
+                      <li>Gap: All tech-first, none address human engagement.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="4" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 4 • Solution</span>
+                  <span class="chip">AI-Native</span>
+                  <span class="chip">Explainable</span>
+                </div>
+                <div class="space-y-6">
+                  <h2 class="text-2xl sm:text-3xl font-semibold text-white">The browser that makes employees proactive</h2>
+                  <ul class="grid gap-4 sm:grid-cols-2 text-sm text-zinc-300/85">
+                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Measures engagement with explainable AI.</li>
+                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Surfaces loyalty + policy adherence metrics aligned with managers.</li>
+                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Orchestrates nudges, flows, and gamification for engagement.</li>
+                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Reduces incidents &amp; boosts productivity by empowering employees.</li>
+                  </ul>
+                  <p class="text-base italic text-zinc-300/80">From “big brother” surveillance → to empathetic, explainable engagement.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="5" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 5 • Product Concept</span>
+                  <span class="chip">Flow</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-2">
+                  <div class="space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Human-centered engagement surfaces</h2>
+                    <p class="text-base text-zinc-300/90">A browser experience that feels modern and motivating, not punitive.</p>
+                    <div class="grid gap-3 text-sm text-zinc-300/85">
+                      <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                        <p class="font-semibold text-white">Tasks Feed</p>
+                        <p>Personalized, TikTok-like stream of work items and priorities.</p>
+                      </div>
+                      <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                        <p class="font-semibold text-white">Engagement Nudges</p>
+                        <p>Streaks, progress indicators, and loyalty loops.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid gap-3 text-sm text-zinc-300/85">
+                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                      <p class="font-semibold text-white">Policy Prompts</p>
+                      <p>Explainable warnings when risky behavior occurs.</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                      <p class="font-semibold text-white">Manager Dashboard</p>
+                      <p>Explainable AI reports reveal the “why” behind disengagement.</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                      <p class="font-semibold text-white">Mockups / Wireframes</p>
+                      <p>Simple visuals can be embedded here as they become available.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="6" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 6 • Architecture &amp; AI Moat</span>
+                  <span class="chip">Moat</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-2">
+                  <div class="space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Privacy-first, explainable stack</h2>
+                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <li>On-device engagement agent tracks patterns while respecting privacy.</li>
+                      <li>Policy engine integrates with SSO, CASB, EDR, and DLP.</li>
+                      <li>Explainable AI layer supplies transparent metrics for managers &amp; compliance.</li>
+                      <li>Compliance artifacts provide audit logs, incident evidence, prompt history.</li>
+                    </ul>
+                  </div>
+                  <div class="rounded-3xl bg-white/5 ring-1 ring-white/10 p-6">
+                    <p class="text-base font-semibold text-white">Moat</p>
+                    <p class="mt-3 text-sm text-zinc-300/85">
+                      First enterprise browser coupling security + engagement + explainability in a single control plane.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="7" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 7 • Market &amp; ICP</span>
+                  <span class="chip">ICP</span>
+                  <span class="chip">TAM</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-3">
+                  <div class="sm:col-span-2 space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Buyer focus &amp; expansion path</h2>
+                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <li><span class="font-semibold text-white">ICP buyers:</span> CIO, CISO, Head of Productivity/Compliance.</li>
+                      <li><span class="font-semibold text-white">Beachhead:</span> EU subsidiaries seeking AI Act / NIS2 compliance quick wins.</li>
+                      <li><span class="font-semibold text-white">Expansion:</span> US public companies addressing SEC cyber disclosures.</li>
+                    </ul>
+                  </div>
+                  <div class="rounded-3xl bg-white/5 ring-1 ring-white/10 p-6">
+                    <p class="text-base font-semibold text-white">TAM</p>
+                    <p class="mt-3 text-sm text-zinc-300/85">
+                      Enterprise browsers + engagement tools → multi-billion market; Island/Talon prove buyer appetite.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="8" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 8 • Business Model &amp; GTM</span>
+                  <span class="chip">SaaS</span>
+                  <span class="chip">Channels</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-2">
+                  <div class="space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Revenue design</h2>
+                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <li>SaaS per-seat license.</li>
+                      <li>Add-ons: compliance packs (AI Act, NIS2, SEC), analytics modules.</li>
+                      <li>Margins: 70–80% (enterprise SaaS standard).</li>
+                    </ul>
+                  </div>
+                  <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Go-to-Market</h3>
+                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <li>Land-and-expand pilots with design partners.</li>
+                      <li>Channel via MSSPs &amp; security VARs.</li>
+                      <li>Upsell engagement modules once trust is established.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="9" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 9 • Team &amp; Roadmap</span>
+                  <span class="chip">Execution</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-2">
+                  <div class="space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Operator-led team</h2>
+                    <p class="text-base text-zinc-300/90">
+                      Victor Lavrenko — ex-Cốc Cốc (built 30M-MAU browser against Chrome, exited 2018). Pipeline of ex-Cốc Cốc engineers ready to rejoin.
+                    </p>
+                  </div>
+                  <div class="space-y-4">
+                    <h3 class="text-lg font-semibold text-white">Roadmap</h3>
+                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <li>0–6 mo: extension + engagement measurement pilots.</li>
+                      <li>6–12 mo: secure browser wrapper + compliance packs.</li>
+                      <li>12–18 mo: full AI-native enterprise browser with engagement orchestration.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="slide" data-slide="10" aria-hidden="true">
+              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
+                  <span class="chip">Slide 10 • Ask</span>
+                  <span class="chip">Raise</span>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-2">
+                  <div class="space-y-4">
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-white">Raising $3M pre-seed</h2>
+                    <p class="text-base text-zinc-300/90">
+                      18–24 months runway to build the first AI-native enterprise browser for engagement + security.
+                    </p>
+                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <li>60% engineering (browser + AI + integrations).</li>
+                      <li>20% security/compliance readiness (SOC2, EU AI Act/NIS2 packs).</li>
+                      <li>20% GTM &amp; design partner pilots.</li>
+                    </ul>
+                  </div>
+                  <div class="rounded-3xl bg-white/5 ring-1 ring-white/10 p-6 flex flex-col justify-between">
+                    <div>
+                      <p class="text-lg font-semibold text-white">Milestones</p>
+                      <ul class="mt-3 space-y-2 text-sm text-zinc-300/85">
+                        <li>3 design partners onboarded.</li>
+                        <li>Compliance packs shipped.</li>
+                        <li>Engagement metrics reducing policy violations.</li>
+                      </ul>
+                    </div>
+                    <p class="mt-6 text-sm text-zinc-300/80 italic">
+                      “Island proved the browser is the security control plane. We’re proving it can also be the engagement and loyalty plane — turning employees from risk factors into active defenders.”
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div
+            class="slider-controls mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between text-sm text-zinc-300"
+          >
+            <div class="flex items-center gap-3">
+              <button
+                id="prev-slide"
+                type="button"
+                class="nav-button inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 transition hover:bg-white/10"
+                aria-label="Previous slide"
+                disabled
+              >
+                <span aria-hidden="true">←</span>
+                <span class="hidden sm:inline">Prev</span>
+              </button>
+              <button
+                id="next-slide"
+                type="button"
+                class="nav-button inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 transition hover:bg-white/10"
+                aria-label="Next slide"
+              >
+                <span class="hidden sm:inline">Next</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+            <div class="flex flex-col gap-3 sm:items-end">
+              <div class="progress-rail flex flex-wrap justify-center sm:justify-end gap-2" aria-hidden="false">
+                <button type="button" class="progress-chip" data-slide-target="1" aria-label="Go to slide 1" aria-current="true">1</button>
+                <button type="button" class="progress-chip" data-slide-target="2" aria-label="Go to slide 2">2</button>
+                <button type="button" class="progress-chip" data-slide-target="3" aria-label="Go to slide 3">3</button>
+                <button type="button" class="progress-chip" data-slide-target="4" aria-label="Go to slide 4">4</button>
+                <button type="button" class="progress-chip" data-slide-target="5" aria-label="Go to slide 5">5</button>
+                <button type="button" class="progress-chip" data-slide-target="6" aria-label="Go to slide 6">6</button>
+                <button type="button" class="progress-chip" data-slide-target="7" aria-label="Go to slide 7">7</button>
+                <button type="button" class="progress-chip" data-slide-target="8" aria-label="Go to slide 8">8</button>
+                <button type="button" class="progress-chip" data-slide-target="9" aria-label="Go to slide 9">9</button>
+                <button type="button" class="progress-chip" data-slide-target="10" aria-label="Go to slide 10">10</button>
+              </div>
+              <p id="slide-status" class="text-xs uppercase tracking-[0.3em] text-zinc-400">Slide 1 of 10</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="max-w-6xl mx-auto border-t border-white/10 mt-20 py-10 px-6 text-sm text-zinc-400">
+      <div class="flex flex-col gap-3">
+        <p>© <span id="year"></span> Victor Lavrenko. All rights reserved.</p>
+        <p class="max-w-3xl leading-relaxed">
+          This confidential material is provided solely for informational purposes to potential partners and investors. Do not share externally without consent.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const now = new Date();
+      document.getElementById('year').textContent = now.getFullYear();
+      document.getElementById('updated-date').textContent = now.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+
+      const slides = Array.from(document.querySelectorAll('[data-slide]'));
+      const totalSlides = slides.length;
+      const prevButton = document.getElementById('prev-slide');
+      const nextButton = document.getElementById('next-slide');
+      const progressButtons = Array.from(document.querySelectorAll('[data-slide-target]'));
+      const statusLabel = document.getElementById('slide-status');
+      let currentIndex = 0;
+      let wheelLocked = false;
+
+      function setActiveSlide(newIndex, { focus = false } = {}) {
+        if (newIndex < 0 || newIndex >= totalSlides || newIndex === currentIndex) return;
+
+        const currentSlide = slides[currentIndex];
+        currentSlide.classList.remove('slide-active');
+        currentSlide.setAttribute('aria-hidden', 'true');
+
+        const nextSlide = slides[newIndex];
+        nextSlide.classList.add('slide-active');
+        nextSlide.setAttribute('aria-hidden', 'false');
+
+        progressButtons.forEach((button) => {
+          const isActive = Number(button.dataset.slideTarget) === newIndex + 1;
+          button.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
+
+        prevButton.disabled = newIndex === 0;
+        nextButton.disabled = newIndex === totalSlides - 1;
+        statusLabel.textContent = `Slide ${newIndex + 1} of ${totalSlides}`;
+
+        currentIndex = newIndex;
+
+        if (focus) {
+          const focusable = nextSlide.querySelector('h1, h2, h3, p, [tabindex]');
+          if (focusable) focusable.focus({ preventScroll: true });
+        }
+      }
+
+      prevButton.addEventListener('click', () => setActiveSlide(currentIndex - 1));
+      nextButton.addEventListener('click', () => setActiveSlide(currentIndex + 1));
+
+      progressButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const targetIndex = Number(button.dataset.slideTarget) - 1;
+          setActiveSlide(targetIndex, { focus: true });
+        });
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'PageDown') {
+          event.preventDefault();
+          setActiveSlide(currentIndex + 1);
+        }
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp' || event.key === 'PageUp') {
+          event.preventDefault();
+          setActiveSlide(currentIndex - 1);
+        }
+        if (event.key === 'Home') {
+          event.preventDefault();
+          setActiveSlide(0, { focus: true });
+        }
+        if (event.key === 'End') {
+          event.preventDefault();
+          setActiveSlide(totalSlides - 1, { focus: true });
+        }
+      });
+
+      window.addEventListener(
+        'wheel',
+        (event) => {
+          if (Math.abs(event.deltaY) < 40) return;
+          event.preventDefault();
+          if (wheelLocked) return;
+          wheelLocked = true;
+          if (event.deltaY > 0) {
+            setActiveSlide(currentIndex + 1);
+          } else {
+            setActiveSlide(currentIndex - 1);
+          }
+          setTimeout(() => {
+            wheelLocked = false;
+          }, 600);
+        },
+        { passive: false }
+      );
+
+      let touchStartY = null;
+      window.addEventListener('touchstart', (event) => {
+        touchStartY = event.touches[0].clientY;
+      });
+      window.addEventListener('touchmove', (event) => {
+        if (touchStartY === null) return;
+        const delta = touchStartY - event.touches[0].clientY;
+        if (Math.abs(delta) < 50) return;
+        if (delta > 0) {
+          setActiveSlide(currentIndex + 1);
+        } else {
+          setActiveSlide(currentIndex - 1);
+        }
+        touchStartY = null;
+      });
+      window.addEventListener('touchend', () => {
+        touchStartY = null;
+      });
+    </script>
+  </body>
+</html>
