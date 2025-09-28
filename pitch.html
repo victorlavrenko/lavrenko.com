@@ -89,27 +89,42 @@
           transform: translateY(0) scale(1);
         }
       }
-      .progress-chip {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 2rem;
-        height: 2rem;
+      .progress-track {
+        display: flex;
+        gap: 0.5rem;
+        width: 100%;
+        flex: 1 1 auto;
+      }
+      .progress-segment {
+        position: relative;
+        flex: 1 1 0;
+        height: 0.35rem;
         border-radius: 9999px;
-        background-color: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        font-size: 0.75rem;
-        font-weight: 600;
-        transition: all 0.2s ease;
+        background-color: rgba(255, 255, 255, 0.12);
+        transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
       }
-      .progress-chip[aria-current='true'] {
-        background: linear-gradient(120deg, rgba(99, 102, 241, 0.18), rgba(99, 102, 241, 0.35));
-        border-color: rgba(99, 102, 241, 0.45);
-        color: #fff;
+      .progress-segment::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(120deg, rgba(99, 102, 241, 0.7), rgba(99, 102, 241, 0.35));
+        opacity: 0;
+        transform: scaleX(0.25);
+        transform-origin: left;
+        transition: opacity 0.25s ease, transform 0.25s ease;
       }
-      .progress-chip:focus-visible {
+      .progress-segment[aria-current='true'] {
+        background-color: rgba(99, 102, 241, 0.4);
+        box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.35), 0 6px 20px rgba(99, 102, 241, 0.2);
+      }
+      .progress-segment[aria-current='true']::after {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+      .progress-segment:focus-visible {
         outline: 2px solid rgba(99, 102, 241, 0.55);
-        outline-offset: 2px;
+        outline-offset: 3px;
       }
       .nav-button[disabled] {
         opacity: 0.35;
@@ -123,7 +138,8 @@
       @media print {
         header,
         .slider-controls,
-        .progress-rail,
+        .nav-button,
+        .progress-track,
         .noise::before {
           display: none !important;
         }
@@ -180,50 +196,109 @@
           aria-roledescription="carousel"
           aria-label="Lavrenko investor pitch deck"
         >
-          <div class="space-y-12">
-            <article class="slide slide-active" data-slide="1" aria-hidden="false">
-              <div class="max-w-4xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 shadow-xl shadow-indigo-500/10 overflow-hidden print-friendly">
-                <div class="p-8 sm:p-12 flex flex-col gap-8">
-                  <div class="flex flex-wrap gap-3 items-center text-xs uppercase tracking-[0.2em] text-accent-200/80">
-                    <span class="chip">Slide 1 • Cover</span>
-                    <span class="chip">AI • Security • Productivity</span>
-                  </div>
-                  <div class="flex flex-col gap-6">
-                    <div>
-                      <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
-                        AI-Native Enterprise Browser for Security &amp; Productivity
-                      </h1>
-                      <div class="mt-4 space-y-4 max-w-2xl">
-                        <p class="text-xl sm:text-2xl font-semibold text-white tracking-tight">
-                          The strongest security starts with loyalty — and loyalty powers efficiency.
-                        </p>
-                        <p class="text-base sm:text-lg text-zinc-300/90 leading-relaxed">
-                          Helping enterprises amplify employee engagement with explainable AI — so you understand why some teams
-                          need support, and automatically turn that insight into stronger loyalty, security, and productivity.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                      <div class="flex items-center gap-3">
-                        <div class="grid place-items-center h-12 w-12 rounded-2xl bg-white/10 ring-1 ring-white/10">
-                          <span class="text-xl font-semibold">VL</span>
-                        </div>
-                        <div>
-                          <p class="text-sm font-semibold text-white">Victor Lavrenko</p>
-                          <p class="text-sm text-zinc-400">Founder • ex-Cốc Cốc (30M MAU)</p>
-                        </div>
-                      </div>
-                      <div class="flex flex-wrap gap-3 text-xs text-zinc-400">
-                        <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">PeaceTech</span>
-                        <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">lavrenko.com</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <div class="flex flex-col gap-6">
+            <div class="flex w-full items-center gap-3 sm:gap-4">
+              <button
+                id="prev-slide"
+                type="button"
+                class="nav-button group grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/5 ring-1 ring-white/10 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2"
+                aria-label="Previous slide"
+                disabled
+              >
+                <span class="pointer-events-none text-lg font-semibold text-white">←</span>
+              </button>
+              <div class="progress-track flex-1" role="group" aria-label="Slide progress">
+                <button
+                  type="button"
+                  class="progress-segment"
+                  data-slide-target="1"
+                  aria-label="Go to slide 1"
+                  aria-current="true"
+                >
+                  <span class="sr-only">Slide 1</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="2" aria-label="Go to slide 2" aria-current="false">
+                  <span class="sr-only">Slide 2</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="3" aria-label="Go to slide 3" aria-current="false">
+                  <span class="sr-only">Slide 3</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="4" aria-label="Go to slide 4" aria-current="false">
+                  <span class="sr-only">Slide 4</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="5" aria-label="Go to slide 5" aria-current="false">
+                  <span class="sr-only">Slide 5</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="6" aria-label="Go to slide 6" aria-current="false">
+                  <span class="sr-only">Slide 6</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="7" aria-label="Go to slide 7" aria-current="false">
+                  <span class="sr-only">Slide 7</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="8" aria-label="Go to slide 8" aria-current="false">
+                  <span class="sr-only">Slide 8</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="9" aria-label="Go to slide 9" aria-current="false">
+                  <span class="sr-only">Slide 9</span>
+                </button>
+                <button type="button" class="progress-segment" data-slide-target="10" aria-label="Go to slide 10" aria-current="false">
+                  <span class="sr-only">Slide 10</span>
+                </button>
               </div>
-            </article>
+              <button
+                id="next-slide"
+                type="button"
+                class="nav-button group grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/5 ring-1 ring-white/10 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 focus-visible:ring-offset-2"
+                aria-label="Next slide"
+              >
+                <span class="pointer-events-none text-lg font-semibold text-white">→</span>
+              </button>
+            </div>
 
-            <article class="slide" data-slide="2" aria-hidden="true">
+            <div class="space-y-12">
+                <article class="slide slide-active" data-slide="1" aria-hidden="false">
+                  <div class="max-w-4xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 shadow-xl shadow-indigo-500/10 overflow-hidden print-friendly">
+                    <div class="p-8 sm:p-12 flex flex-col gap-8">
+                      <div class="flex flex-wrap gap-3 items-center text-xs uppercase tracking-[0.2em] text-accent-200/80">
+                        <span class="chip">Slide 1 • Cover</span>
+                        <span class="chip">AI • Security • Productivity</span>
+                      </div>
+                      <div class="flex flex-col gap-6">
+                        <div>
+                          <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
+                            AI-Native Enterprise Browser for Security &amp; Productivity
+                          </h1>
+                          <div class="mt-4 space-y-4 max-w-2xl">
+                            <p class="text-xl sm:text-2xl font-semibold text-white tracking-tight">
+                              The strongest security starts with loyalty — and loyalty powers efficiency.
+                            </p>
+                            <p class="text-base sm:text-lg text-zinc-300/90 leading-relaxed">
+                              Helping enterprises amplify employee engagement with explainable AI — so you understand why some teams
+                              need support, and automatically turn that insight into stronger loyalty, security, and productivity.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                          <div class="flex items-center gap-3">
+                            <div class="grid place-items-center h-12 w-12 rounded-2xl bg-white/10 ring-1 ring-white/10">
+                              <span class="text-xl font-semibold">VL</span>
+                            </div>
+                            <div>
+                              <p class="text-sm font-semibold text-white">Victor Lavrenko</p>
+                              <p class="text-sm text-zinc-400">Founder • ex-Cốc Cốc (30M MAU)</p>
+                            </div>
+                          </div>
+                          <div class="flex flex-wrap gap-3 text-xs text-zinc-400">
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">PeaceTech</span>
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">lavrenko.com</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="slide" data-slide="2" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 2 • Problem</span>
@@ -251,9 +326,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="3" aria-hidden="true">
+                <article class="slide" data-slide="3" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 3 • Why Now</span>
@@ -277,9 +352,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="4" aria-hidden="true">
+                <article class="slide" data-slide="4" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 4 • Solution</span>
@@ -297,9 +372,9 @@
                   <p class="text-base italic text-zinc-300/80">From “big brother” surveillance → to empathetic, explainable engagement.</p>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="5" aria-hidden="true">
+                <article class="slide" data-slide="5" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 5 • Product Concept</span>
@@ -336,9 +411,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="6" aria-hidden="true">
+                <article class="slide" data-slide="6" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 6 • Architecture &amp; AI Moat</span>
@@ -362,9 +437,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="7" aria-hidden="true">
+                <article class="slide" data-slide="7" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 7 • Market &amp; ICP</span>
@@ -388,9 +463,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="8" aria-hidden="true">
+                <article class="slide" data-slide="8" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 8 • Business Model &amp; GTM</span>
@@ -416,9 +491,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="9" aria-hidden="true">
+                <article class="slide" data-slide="9" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 9 • Team &amp; Roadmap</span>
@@ -441,9 +516,9 @@
                   </div>
                 </div>
               </div>
-            </article>
+                </article>
 
-            <article class="slide" data-slide="10" aria-hidden="true">
+                <article class="slide" data-slide="10" aria-hidden="true">
               <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 10 • Ask</span>
@@ -476,47 +551,8 @@
                   </div>
                 </div>
               </div>
-            </article>
-          </div>
-
-          <div
-            class="slider-controls mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between text-sm text-zinc-300"
-          >
-            <div class="flex items-center gap-3">
-              <button
-                id="prev-slide"
-                type="button"
-                class="nav-button inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 transition hover:bg-white/10"
-                aria-label="Previous slide"
-                disabled
-              >
-                <span aria-hidden="true">←</span>
-                <span class="hidden sm:inline">Prev</span>
-              </button>
-              <button
-                id="next-slide"
-                type="button"
-                class="nav-button inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 transition hover:bg-white/10"
-                aria-label="Next slide"
-              >
-                <span class="hidden sm:inline">Next</span>
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-            <div class="flex flex-col gap-3 sm:items-end">
-              <div class="progress-rail flex flex-wrap justify-center sm:justify-end gap-2" aria-hidden="false">
-                <button type="button" class="progress-chip" data-slide-target="1" aria-label="Go to slide 1" aria-current="true">1</button>
-                <button type="button" class="progress-chip" data-slide-target="2" aria-label="Go to slide 2">2</button>
-                <button type="button" class="progress-chip" data-slide-target="3" aria-label="Go to slide 3">3</button>
-                <button type="button" class="progress-chip" data-slide-target="4" aria-label="Go to slide 4">4</button>
-                <button type="button" class="progress-chip" data-slide-target="5" aria-label="Go to slide 5">5</button>
-                <button type="button" class="progress-chip" data-slide-target="6" aria-label="Go to slide 6">6</button>
-                <button type="button" class="progress-chip" data-slide-target="7" aria-label="Go to slide 7">7</button>
-                <button type="button" class="progress-chip" data-slide-target="8" aria-label="Go to slide 8">8</button>
-                <button type="button" class="progress-chip" data-slide-target="9" aria-label="Go to slide 9">9</button>
-                <button type="button" class="progress-chip" data-slide-target="10" aria-label="Go to slide 10">10</button>
+                </article>
               </div>
-              <p id="slide-status" class="text-xs uppercase tracking-[0.3em] text-zinc-400">Slide 1 of 10</p>
             </div>
           </div>
         </div>
@@ -546,9 +582,7 @@
       const prevButton = document.getElementById('prev-slide');
       const nextButton = document.getElementById('next-slide');
       const progressButtons = Array.from(document.querySelectorAll('[data-slide-target]'));
-      const statusLabel = document.getElementById('slide-status');
       let currentIndex = 0;
-      let wheelLocked = false;
 
       function setActiveSlide(newIndex, { focus = false } = {}) {
         if (newIndex < 0 || newIndex >= totalSlides || newIndex === currentIndex) return;
@@ -568,8 +602,6 @@
 
         prevButton.disabled = newIndex === 0;
         nextButton.disabled = newIndex === totalSlides - 1;
-        statusLabel.textContent = `Slide ${newIndex + 1} of ${totalSlides}`;
-
         currentIndex = newIndex;
 
         if (focus) {
@@ -606,25 +638,6 @@
           setActiveSlide(totalSlides - 1, { focus: true });
         }
       });
-
-      window.addEventListener(
-        'wheel',
-        (event) => {
-          if (Math.abs(event.deltaY) < 40) return;
-          event.preventDefault();
-          if (wheelLocked) return;
-          wheelLocked = true;
-          if (event.deltaY > 0) {
-            setActiveSlide(currentIndex + 1);
-          } else {
-            setActiveSlide(currentIndex - 1);
-          }
-          setTimeout(() => {
-            wheelLocked = false;
-          }, 600);
-        },
-        { passive: false }
-      );
 
       let touchStartY = null;
       window.addEventListener('touchstart', (event) => {
