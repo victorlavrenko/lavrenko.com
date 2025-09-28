@@ -72,6 +72,57 @@
         text-transform: uppercase;
         border: 1px solid rgba(255, 255, 255, 0.12);
       }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 0.4rem 0.9rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .hero-title {
+        font-size: clamp(2.25rem, 5vw, 3.75rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: transparent;
+        background-image: linear-gradient(to bottom, #ffffff, rgba(161, 161, 170, 0.9));
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      .hero-card {
+        border-radius: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 24px 60px rgba(79, 70, 229, 0.14);
+        overflow: hidden;
+        padding: 2rem;
+      }
+      .slide-card {
+        border-radius: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 16px 40px rgba(79, 70, 229, 0.12);
+        padding: 2rem;
+      }
+      .surface-card {
+        border-radius: 1rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+      }
+      .surface-panel {
+        border-radius: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+      }
+      @media (min-width: 640px) {
+        .hero-card {
+          padding: 3rem;
+        }
+        .slide-card {
+          padding: 2.5rem;
+        }
+      }
       .slide {
         display: none;
       }
@@ -94,6 +145,7 @@
         gap: 0.5rem;
         width: 100%;
         flex: 1 1 auto;
+        min-height: 0.35rem;
       }
       .progress-segment {
         position: relative;
@@ -207,44 +259,7 @@
               >
                 <span class="pointer-events-none text-lg font-semibold text-white">←</span>
               </button>
-              <div class="progress-track flex-1" role="group" aria-label="Slide progress">
-                <button
-                  type="button"
-                  class="progress-segment"
-                  data-slide-target="1"
-                  aria-label="Go to slide 1"
-                  aria-current="true"
-                >
-                  <span class="sr-only">Slide 1</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="2" aria-label="Go to slide 2" aria-current="false">
-                  <span class="sr-only">Slide 2</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="3" aria-label="Go to slide 3" aria-current="false">
-                  <span class="sr-only">Slide 3</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="4" aria-label="Go to slide 4" aria-current="false">
-                  <span class="sr-only">Slide 4</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="5" aria-label="Go to slide 5" aria-current="false">
-                  <span class="sr-only">Slide 5</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="6" aria-label="Go to slide 6" aria-current="false">
-                  <span class="sr-only">Slide 6</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="7" aria-label="Go to slide 7" aria-current="false">
-                  <span class="sr-only">Slide 7</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="8" aria-label="Go to slide 8" aria-current="false">
-                  <span class="sr-only">Slide 8</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="9" aria-label="Go to slide 9" aria-current="false">
-                  <span class="sr-only">Slide 9</span>
-                </button>
-                <button type="button" class="progress-segment" data-slide-target="10" aria-label="Go to slide 10" aria-current="false">
-                  <span class="sr-only">Slide 10</span>
-                </button>
-              </div>
+              <div class="progress-track" data-progress-track role="group" aria-label="Slide progress"></div>
               <button
                 id="next-slide"
                 type="button"
@@ -257,8 +272,8 @@
 
             <div class="space-y-0 sm:space-y-12">
                 <article class="slide slide-active" data-slide="1" aria-hidden="false">
-                  <div class="max-w-4xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 shadow-xl shadow-indigo-500/10 overflow-hidden print-friendly">
-                    <div class="p-8 sm:p-12 flex flex-col gap-8">
+                  <div class="max-w-4xl mx-auto hero-card print-friendly">
+                    <div class="flex flex-col gap-8">
                       <div class="flex flex-wrap gap-3 items-center text-xs uppercase tracking-[0.2em] text-accent-200/80">
                         <span class="chip">Slide 1 • Cover</span>
                         <span class="chip">AI</span>
@@ -267,7 +282,7 @@
                       </div>
                       <div class="flex flex-col gap-6">
                         <div>
-                          <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-300">
+                          <h1 class="hero-title">
                             AI-Native Browser for Security &amp; Productivity
                           </h1>
                           <div class="mt-4 space-y-4 max-w-2xl">
@@ -290,8 +305,8 @@
                             </div>
                           </div>
                           <div class="flex flex-wrap gap-3 text-xs text-zinc-400">
-                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">PeaceTech</span>
-                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1.5 ring-1 ring-white/10">lavrenko.com</span>
+                            <span class="pill">PeaceTech</span>
+                            <span class="pill">lavrenko.com</span>
                           </div>
                         </div>
                       </div>
@@ -300,7 +315,7 @@
                 </article>
 
                 <article class="slide" data-slide="2" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 2 • Problem</span>
                   <span class="chip">Engagement Risk</span>
@@ -313,7 +328,7 @@
                     </p>
                   </div>
                   <div class="sm:col-span-2 flex flex-col gap-3 text-sm text-zinc-300/80">
-                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                    <div class="surface-card">
                       <p class="font-semibold text-zinc-100">Macro stressors</p>
                       <ul class="mt-2 space-y-2 list-disc list-inside">
                         <li>Globalization + $100K H1B fee → more offshore teams.</li>
@@ -321,7 +336,7 @@
                         <li>RTO &amp; surveillance failing to restore engagement.</li>
                       </ul>
                     </div>
-                    <p class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 text-sm text-zinc-300/80">
+                    <p class="surface-card text-sm text-zinc-300/80">
                       Result: More incidents, lower productivity, cultural drift.
                     </p>
                   </div>
@@ -330,7 +345,7 @@
                 </article>
 
                 <article class="slide" data-slide="3" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 3 • Why Now</span>
                   <span class="chip">Regulation</span>
@@ -356,7 +371,7 @@
                 </article>
 
                 <article class="slide" data-slide="4" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 4 • Solution</span>
                   <span class="chip">AI-Native</span>
@@ -365,10 +380,10 @@
                 <div class="space-y-6">
                   <h2 class="text-2xl sm:text-3xl font-semibold text-white">The browser that makes employees proactive</h2>
                   <ul class="grid gap-4 sm:grid-cols-2 text-sm text-zinc-300/85">
-                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Measures engagement with explainable AI.</li>
-                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Surfaces loyalty + policy adherence metrics aligned with managers.</li>
-                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Orchestrates nudges, flows, and gamification for engagement.</li>
-                    <li class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">Reduces incidents &amp; boosts productivity by empowering employees.</li>
+                    <li class="surface-card">Measures engagement with explainable AI.</li>
+                    <li class="surface-card">Surfaces loyalty + policy adherence metrics aligned with managers.</li>
+                    <li class="surface-card">Orchestrates nudges, flows, and gamification for engagement.</li>
+                    <li class="surface-card">Reduces incidents &amp; boosts productivity by empowering employees.</li>
                   </ul>
                   <p class="text-base italic text-zinc-300/80">From “big brother” surveillance → to empathetic, explainable engagement.</p>
                 </div>
@@ -376,7 +391,7 @@
                 </article>
 
                 <article class="slide" data-slide="5" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 5 • Product Concept</span>
                   <span class="chip">Flow</span>
@@ -386,26 +401,26 @@
                     <h2 class="text-2xl sm:text-3xl font-semibold text-white">Human-centered engagement surfaces</h2>
                     <p class="text-base text-zinc-300/90">A browser experience that feels modern and motivating, not punitive.</p>
                     <div class="grid gap-3 text-sm text-zinc-300/85">
-                      <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                      <div class="surface-card">
                         <p class="font-semibold text-white">Tasks Feed</p>
                         <p>Personalized, TikTok-like stream of work items and priorities.</p>
                       </div>
-                      <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                      <div class="surface-card">
                         <p class="font-semibold text-white">Engagement Nudges</p>
                         <p>Streaks, progress indicators, and loyalty loops.</p>
                       </div>
                     </div>
                   </div>
                   <div class="grid gap-3 text-sm text-zinc-300/85">
-                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                    <div class="surface-card">
                       <p class="font-semibold text-white">Policy Prompts</p>
                       <p>Explainable warnings when risky behavior occurs.</p>
                     </div>
-                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                    <div class="surface-card">
                       <p class="font-semibold text-white">Manager Dashboard</p>
                       <p>Explainable AI reports reveal the “why” behind disengagement.</p>
                     </div>
-                    <div class="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4">
+                    <div class="surface-card">
                       <p class="font-semibold text-white">Mockups / Wireframes</p>
                       <p>Simple visuals can be embedded here as they become available.</p>
                     </div>
@@ -415,7 +430,7 @@
                 </article>
 
                 <article class="slide" data-slide="6" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 6 • Architecture &amp; AI Moat</span>
                 </div>
@@ -429,7 +444,7 @@
                       <li>Compliance artifacts provide audit logs, incident evidence, prompt history.</li>
                     </ul>
                   </div>
-                  <div class="rounded-3xl bg-white/5 ring-1 ring-white/10 p-6">
+                  <div class="surface-panel">
                     <p class="text-base font-semibold text-white">Moat</p>
                     <p class="mt-3 text-sm text-zinc-300/85">
                       First enterprise browser coupling security + engagement + explainability in a single control plane.
@@ -440,7 +455,7 @@
                 </article>
 
                 <article class="slide" data-slide="7" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 7 • Market &amp; ICP</span>
                   <span class="chip">ICP</span>
@@ -455,7 +470,7 @@
                       <li><span class="font-semibold text-white">Expansion:</span> US public companies addressing SEC cyber disclosures.</li>
                     </ul>
                   </div>
-                  <div class="rounded-3xl bg-white/5 ring-1 ring-white/10 p-6">
+                  <div class="surface-panel">
                     <p class="text-base font-semibold text-white">TAM</p>
                     <p class="mt-3 text-sm text-zinc-300/85">
                       Enterprise browsers + engagement tools → multi-billion market; Island/Talon prove buyer appetite.
@@ -466,7 +481,7 @@
                 </article>
 
                 <article class="slide" data-slide="8" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 8 • Business Model &amp; GTM</span>
                   <span class="chip">SaaS</span>
@@ -494,7 +509,7 @@
                 </article>
 
                 <article class="slide" data-slide="9" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 9 • Team &amp; Roadmap</span>
                   <span class="chip">Execution</span>
@@ -519,7 +534,7 @@
                 </article>
 
                 <article class="slide" data-slide="10" aria-hidden="true">
-              <div class="max-w-5xl mx-auto rounded-3xl bg-white/5 ring-1 ring-white/10 p-8 sm:p-10 shadow-lg shadow-indigo-500/10 space-y-6 print-friendly">
+              <div class="max-w-5xl mx-auto slide-card space-y-6 print-friendly">
                 <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent-200/80">
                   <span class="chip">Slide 10 • Ask</span>
                   <span class="chip">Raise</span>
@@ -536,7 +551,7 @@
                       <li>20% GTM &amp; design partner pilots.</li>
                     </ul>
                   </div>
-                  <div class="rounded-3xl bg-white/5 ring-1 ring-white/10 p-6 flex flex-col justify-between">
+                  <div class="surface-panel flex flex-col justify-between">
                     <div>
                       <p class="text-lg font-semibold text-white">Milestones</p>
                       <ul class="mt-3 space-y-2 text-sm text-zinc-300/85">
@@ -581,7 +596,22 @@
       const totalSlides = slides.length;
       const prevButton = document.getElementById('prev-slide');
       const nextButton = document.getElementById('next-slide');
-      const progressButtons = Array.from(document.querySelectorAll('[data-slide-target]'));
+      const progressTrack = document.querySelector('[data-progress-track]');
+      const progressButtons = [];
+
+      if (progressTrack) {
+        slides.forEach((_, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'progress-segment';
+          button.dataset.slideTarget = index + 1;
+          button.setAttribute('aria-label', `Go to slide ${index + 1}`);
+          button.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+          button.innerHTML = `<span class="sr-only">Slide ${index + 1}</span>`;
+          progressTrack.appendChild(button);
+          progressButtons.push(button);
+        });
+      }
       let currentIndex = 0;
 
       function setActiveSlide(newIndex, { focus = false } = {}) {
