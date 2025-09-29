@@ -115,6 +115,20 @@
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
         padding: 1.5rem;
       }
+      .topline-gradient {
+        position: relative;
+        overflow: hidden;
+      }
+      .topline-gradient::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 0.25rem;
+        background: linear-gradient(120deg, rgba(99, 102, 241, 0.8), rgba(99, 102, 241, 0.4), rgba(99, 102, 241, 0));
+        pointer-events: none;
+      }
       @media (min-width: 640px) {
         .hero-card {
           padding: 3rem;
@@ -344,7 +358,7 @@
                     </p>
                   </div>
                   <div class="sm:col-span-2 flex flex-col gap-3 text-sm text-zinc-300/80">
-                    <div class="surface-card">
+                    <div class="surface-card topline-gradient">
                       <p class="font-semibold text-zinc-100">Macro stressors</p>
                       <ul class="mt-3 space-y-2 text-sm text-zinc-300/85 fancy-list">
                         <li>Globalization + $100K H1B fee → more offshore teams.</li>
@@ -352,9 +366,6 @@
                         <li>RTO &amp; surveillance failing to restore engagement.</li>
                       </ul>
                     </div>
-                    <p class="surface-card text-sm text-zinc-300/80">
-                      Result: More incidents, lower productivity, cultural drift.
-                    </p>
                   </div>
                 </div>
               </div>
@@ -396,7 +407,7 @@
                 <div class="space-y-6">
                   <h2 class="text-2xl sm:text-3xl font-semibold text-white">The browser that makes employees proactive</h2>
                   <ul class="grid gap-4 sm:grid-cols-2 text-sm text-zinc-300/85">
-                    <li class="surface-card">Measures engagement with explainable AI.</li>
+                    <li class="surface-card topline-gradient">Measures engagement with explainable AI.</li>
                     <li class="surface-card">Surfaces loyalty + policy adherence metrics aligned with managers.</li>
                     <li class="surface-card">Orchestrates nudges, flows, and gamification for engagement.</li>
                     <li class="surface-card">Reduces incidents &amp; boosts productivity by empowering employees.</li>
@@ -432,7 +443,7 @@
                       <p class="font-semibold text-white">Policy Prompts</p>
                       <p>Explainable warnings when risky behavior occurs.</p>
                     </div>
-                    <div class="surface-card">
+                    <div class="surface-card topline-gradient">
                       <p class="font-semibold text-white">Manager Dashboard</p>
                       <p>Explainable AI reports reveal the “why” behind disengagement.</p>
                     </div>
@@ -460,7 +471,7 @@
                       <li>Compliance artifacts provide audit logs, incident evidence, prompt history.</li>
                     </ul>
                   </div>
-                  <div class="surface-panel">
+                  <div class="surface-panel topline-gradient">
                     <p class="text-base font-semibold text-white">Moat</p>
                     <p class="mt-3 text-sm text-zinc-300/85">
                       First enterprise browser coupling security + engagement + explainability in a single control plane.
@@ -498,7 +509,7 @@
                         </div>
                       </div>
                     </div>
-                    <aside class="surface-panel space-y-2 lg:max-w-sm lg:ml-auto">
+                    <aside class="surface-panel topline-gradient space-y-2 lg:max-w-sm lg:ml-auto">
                       <p class="text-sm text-zinc-300/85">
                         <span class="text-base font-semibold text-white">TAM:</span>
                         Enterprise browsers + insider-risk/engagement tools = multi-billion;
@@ -575,8 +586,7 @@
                 <div class="space-y-6">
                   <h2 class="text-2xl sm:text-3xl font-semibold text-white"><strong>Winning team, ready to ship</strong></h2>
                   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-[0.7fr_1.3fr]">
-                    <div class="surface-panel relative h-full overflow-hidden space-y-4">
-                      <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500/80 via-accent-500/40 to-transparent"></div>
+                    <div class="surface-panel h-full space-y-4">
                       <p class="text-lg font-semibold text-white"><strong>Victor Lavrenko — Founder/CEO</strong></p>
                       <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                         <li>Co-founder &amp; CEO, Cốc Cốc Browser/Search (30M+ MAU, 30% desktop share in '17, profitable).</li>
@@ -585,14 +595,12 @@
                       </ul>
                     </div>
                     <div class="grid gap-6 lg:grid-rows-[repeat(2,minmax(0,1fr))]">
-                      <div class="surface-panel relative h-full overflow-hidden space-y-4">
-                        <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500/70 via-accent-500/30 to-transparent"></div>
+                      <div class="surface-panel h-full space-y-4">
                         <p class="text-lg font-semibold text-white"><strong>Team pipeline</strong></p>
                         <p class="mt-3 text-sm text-zinc-300/85">Senior engineers and monetization talent from Cốc Cốc, Mango Techsurance, and successful cybersecurity startups ready to join post-funding.
                         </p>
                       </div>
-                      <div class="surface-panel relative h-full overflow-hidden space-y-4">
-                        <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500/70 via-accent-500/30 to-transparent"></div>
+                      <div class="surface-panel topline-gradient h-full space-y-4">
                         <p class="text-lg font-semibold text-white"><strong>Advisory / Network</strong></p>
                         <p class="mt-3 text-sm text-zinc-300/85">Targeting design partners across People Analytics, Data Security, and IAM ecosystems (Visier, TrustLogix, Secuvy, Binarly, ForgeRock, Snowflake, Workday).
                         </p>
@@ -611,7 +619,7 @@
                 </div>
                 <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
                   <div class="space-y-5">
-                    <div class="surface-panel bg-white/5 border border-white/10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+                    <div class="surface-panel topline-gradient bg-white/5 border border-white/10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                       <div>
                         <p class="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-accent-200/70">Raising</p>
                         <p class="text-2xl sm:text-3xl font-semibold text-white">$3.5M pre-seed</p>
