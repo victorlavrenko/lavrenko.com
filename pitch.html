@@ -689,6 +689,22 @@
       const progressTrack = document.querySelector('[data-progress-track]');
       const progressButtons = [];
 
+      function parseSlideHash() {
+        const hashValue = window.location.hash.slice(1);
+        const parsed = Number.parseInt(hashValue, 10);
+        if (!Number.isNaN(parsed) && parsed >= 1 && parsed <= totalSlides) {
+          return parsed - 1;
+        }
+        return null;
+      }
+
+      function updateSlideHash(index) {
+        const desiredHash = `#${index + 1}`;
+        if (window.location.hash !== desiredHash) {
+          history.replaceState(null, '', desiredHash);
+        }
+      }
+
       if (progressTrack) {
         slides.forEach((_, index) => {
           const button = document.createElement('button');
@@ -723,11 +739,19 @@
         prevButton.disabled = newIndex === 0;
         nextButton.disabled = newIndex === totalSlides - 1;
         currentIndex = newIndex;
+        updateSlideHash(currentIndex);
 
         if (focus) {
           const focusable = nextSlide.querySelector('h1, h2, h3, p, [tabindex]');
           if (focusable) focusable.focus({ preventScroll: true });
         }
+      }
+
+      const initialIndexFromHash = parseSlideHash();
+      if (initialIndexFromHash !== null && initialIndexFromHash !== currentIndex) {
+        setActiveSlide(initialIndexFromHash);
+      } else {
+        updateSlideHash(currentIndex);
       }
 
       prevButton.addEventListener('click', () => setActiveSlide(currentIndex - 1));
@@ -776,6 +800,16 @@
       });
       window.addEventListener('touchend', () => {
         touchStartX = null;
+      });
+
+      window.addEventListener('hashchange', () => {
+        const targetIndex = parseSlideHash();
+        if (targetIndex === null) return;
+        if (targetIndex !== currentIndex) {
+          setActiveSlide(targetIndex, { focus: true });
+        } else {
+          updateSlideHash(currentIndex);
+        }
       });
     </script>
   </body>
