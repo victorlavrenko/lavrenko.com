@@ -178,6 +178,26 @@
         outline: 2px solid rgba(99, 102, 241, 0.55);
         outline-offset: 3px;
       }
+      .fancy-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .fancy-list li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .fancy-list li::before {
+        content: '';
+        flex-shrink: 0;
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0.4rem;
+        border-radius: 9999px;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.45), rgba(99, 102, 241, 0.85));
+        box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 4px 12px rgba(99, 102, 241, 0.3);
+      }
       .nav-button[disabled] {
         opacity: 0.35;
         cursor: not-allowed;
@@ -326,7 +346,7 @@
                   <div class="sm:col-span-2 flex flex-col gap-3 text-sm text-zinc-300/80">
                     <div class="surface-card">
                       <p class="font-semibold text-zinc-100">Macro stressors</p>
-                      <ul class="mt-2 space-y-2 list-disc list-inside">
+                      <ul class="mt-3 space-y-2 text-sm text-zinc-300/85 fancy-list">
                         <li>Globalization + $100K H1B fee → more offshore teams.</li>
                         <li>Remote/hybrid work eroding loyalty.</li>
                         <li>RTO &amp; surveillance failing to restore engagement.</li>
@@ -356,7 +376,7 @@
                   </div>
                   <div class="space-y-4">
                     <h3 class="text-lg font-semibold text-white">Category validation</h3>
-                    <ul class="space-y-3 text-sm text-zinc-300/80">
+                    <ul class="fancy-list space-y-3 text-sm text-zinc-300/80">
                       <li><span class="font-semibold text-white">Island</span> (enterprise browser) → $4.8B valuation (2025).</li>
                       <li><span class="font-semibold text-white">Talon</span> acquired by Palo Alto Networks (~$450–650M).</li>
                       <li>Gap: All tech-first, none address human engagement.</li>
@@ -433,7 +453,7 @@
                 <div class="grid gap-6 sm:grid-cols-2">
                   <div class="space-y-4">
                     <h2 class="text-2xl sm:text-3xl font-semibold text-white">Privacy-first, explainable stack</h2>
-                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                    <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                       <li>On-device engagement agent tracks patterns while respecting privacy.</li>
                       <li>Policy engine integrates with SSO, CASB, EDR, and DLP.</li>
                       <li>Explainable AI layer supplies transparent metrics for managers &amp; compliance.</li>
@@ -529,7 +549,7 @@
                 <div class="grid gap-6 sm:grid-cols-2">
                   <div class="space-y-4">
                     <h2 class="text-2xl sm:text-3xl font-semibold text-white">Revenue design</h2>
-                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                    <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                       <li>SaaS per-seat license.</li>
                       <li>Add-ons: compliance packs (AI Act, NIS2, SEC), analytics modules.</li>
                       <li>Margins: 70–80% (enterprise SaaS standard).</li>
@@ -537,7 +557,7 @@
                   </div>
                   <div class="space-y-4">
                     <h3 class="text-lg font-semibold text-white">Go-to-Market</h3>
-                    <ul class="space-y-3 text-sm text-zinc-300/85">
+                    <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                       <li>Land-and-expand pilots with design partners.</li>
                       <li>Channel via MSSPs &amp; security VARs.</li>
                       <li>Upsell engagement modules once trust is established.</li>
@@ -558,7 +578,7 @@
                     <div class="surface-panel relative h-full overflow-hidden space-y-4">
                       <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500/80 via-accent-500/40 to-transparent"></div>
                       <p class="text-lg font-semibold text-white"><strong>Victor Lavrenko — Founder/CEO</strong></p>
-                      <ul class="space-y-3 text-sm text-zinc-300/85">
+                      <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                         <li>Co-founder &amp; CEO, Cốc Cốc Browser/Search (30M+ MAU, 30% desktop share in '17, profitable).</li>
                         <li>Ex-Nigma.ru, Mail.ru ($6B IPO), Mango Techsurance.</li>
                         <li>Operator with a proven track record of scaling distribution-first consumer tech into enterprise-grade monetization.</li>
@@ -568,14 +588,14 @@
                       <div class="surface-panel relative h-full overflow-hidden space-y-4">
                         <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500/70 via-accent-500/30 to-transparent"></div>
                         <p class="text-lg font-semibold text-white"><strong>Team pipeline</strong></p>
-                        <ul class="space-y-3 text-sm text-zinc-300/85">
+                        <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                           <li>Senior engineers and monetization talent from Cốc Cốc, Mango Techsurance, and successful cybersecurity startups ready to join post-funding.</li>
                         </ul>
                       </div>
                       <div class="surface-panel relative h-full overflow-hidden space-y-4">
                         <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-500/70 via-accent-500/30 to-transparent"></div>
                         <p class="text-lg font-semibold text-white"><strong>Advisory / Network</strong></p>
-                        <ul class="space-y-3 text-sm text-zinc-300/85">
+                        <ul class="fancy-list space-y-3 text-sm text-zinc-300/85">
                           <li>Targeting design partners across People Analytics, Data Security, and IAM ecosystems (Visier, TrustLogix, Secuvy, Binarly, ForgeRock, Snowflake, Workday).</li>
                         </ul>
                       </div>
@@ -602,39 +622,21 @@
                     </div>
                     <div class="space-y-3">
                       <h3 class="text-lg font-semibold text-white">Use of funds</h3>
-                      <ul class="space-y-2 text-sm text-zinc-300/85">
-                        <li class="flex gap-3">
-                          <span class="mt-1 h-2 w-2 rounded-full bg-accent-500/80"></span>
-                          <span>Ship AI-native browser control plane with explainable engagement metrics.</span>
-                        </li>
-                        <li class="flex gap-3">
-                          <span class="mt-1 h-2 w-2 rounded-full bg-accent-500/80"></span>
-                          <span>Deliver compliance-grade evidence artifacts (AI Act, NIS2, SEC cyber disclosure).</span>
-                        </li>
-                        <li class="flex gap-3">
-                          <span class="mt-1 h-2 w-2 rounded-full bg-accent-500/80"></span>
-                          <span>Run 3–4 design partner pilots with insurers, banks, and data-heavy enterprises.</span>
-                        </li>
-                      </ul>
+                        <ul class="fancy-list space-y-2 text-sm text-zinc-300/85">
+                          <li>Ship AI-native browser control plane with explainable engagement metrics.</li>
+                          <li>Deliver compliance-grade evidence artifacts (AI Act, NIS2, SEC cyber disclosure).</li>
+                          <li>Run 3–4 design partner pilots with insurers, banks, and data-heavy enterprises.</li>
+                        </ul>
                     </div>
                   </div>
                   <div class="space-y-5">
                     <div class="surface-panel space-y-3">
                       <p class="text-lg font-semibold text-white">Why now</p>
-                      <ul class="space-y-2 text-sm text-zinc-300/85">
-                        <li class="flex gap-3">
-                          <span class="mt-1 h-2 w-2 rounded-full bg-accent-500/80"></span>
-                          <span>Compliance budgets accelerating (AI Act, NIS2, SEC).</span>
-                        </li>
-                        <li class="flex gap-3">
-                          <span class="mt-1 h-2 w-2 rounded-full bg-accent-500/80"></span>
-                          <span>Island/Talon exits ($4.8B / PANW) validate enterprise browser demand.</span>
-                        </li>
-                        <li class="flex gap-3">
-                          <span class="mt-1 h-2 w-2 rounded-full bg-accent-500/80"></span>
-                          <span>Operator-led team with proven 30M MAU browser track record.</span>
-                        </li>
-                      </ul>
+                        <ul class="fancy-list space-y-2 text-sm text-zinc-300/85">
+                          <li>Compliance budgets accelerating (AI Act, NIS2, SEC).</li>
+                          <li>Island/Talon exits ($4.8B / PANW) validate enterprise browser demand.</li>
+                          <li>Operator-led team with proven 30M MAU browser track record.</li>
+                        </ul>
                     </div>
                     <div class="surface-panel border border-accent-500/40 bg-accent-500/5">
                       <p class="text-lg font-semibold text-white">Offer</p>
