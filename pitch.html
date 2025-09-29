@@ -670,17 +670,26 @@
         <p class="max-w-3xl leading-relaxed">
           Disclaimer: Informational; only for qualified investors; not investment advice or an offering.
         </p>
+        <p class="hidden print-visible mt-2 text-xs">Version date: <span id="print-updated-date"></span></p>
       </div>
     </footer>
 
     <script>
       const now = new Date();
-      document.getElementById('year').textContent = now.getFullYear();
-      document.getElementById('updated-date').textContent = now.toLocaleDateString(undefined, {
+      const formattedDate = now.toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
       });
+
+      const yearElement = document.getElementById('year');
+      if (yearElement) yearElement.textContent = now.getFullYear();
+
+      const updatedDateElement = document.getElementById('updated-date');
+      if (updatedDateElement) updatedDateElement.textContent = formattedDate;
+
+      const printUpdatedDateElement = document.getElementById('print-updated-date');
+      if (printUpdatedDateElement) printUpdatedDateElement.textContent = formattedDate;
 
       const slides = Array.from(document.querySelectorAll('[data-slide]'));
       const totalSlides = slides.length;
